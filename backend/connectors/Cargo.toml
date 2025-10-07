@@ -1,0 +1,23 @@
+[package]
+name = "wallmgr-connectors"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+wallmgr-core = { path = "../core" }
+
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+
+# HTML parsing for some booru sites
+scraper = "0.20"
+url = "2.5"
+async-trait = "0.1"
+urlencoding = "2.1"

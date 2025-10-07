@@ -1,0 +1,24 @@
+[Unit]
+Description=Wallmgr Wallpaper Daemon
+Documentation=https://github.com/dungdinhmanh/wallmgr
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/wallmgr-daemon
+Restart=on-failure
+RestartSec=5
+Environment=RUST_LOG=info
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+ProtectHome=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+# ReadWritePaths=/home/$USER/.config/wallmgr /home/$USER/.local/share/wallmgr /home/$USER/.cache/wallmgr
+
+[Install]
+WantedBy=default.target

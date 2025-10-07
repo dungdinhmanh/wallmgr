@@ -1,0 +1,33 @@
+[package]
+name = "wallmgr-api"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+wallmgr-core = { path = "../core" }
+wallmgr-adapters = { path = "../adapters" }
+wallmgr-renderers = { path = "../renderers" }
+wallmgr-connectors = { path = "../connectors" }
+
+tokio.workspace = true
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+reqwest.workspace = true
+uuid.workspace = true
+chrono.workspace = true
+
+# For file operations
+tokio-util.workspace = true
+
+# Image processing
+image.workspace = true
+
+# Hashing
+sha2 = "0.10"

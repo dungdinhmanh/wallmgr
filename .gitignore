@@ -41,6 +41,36 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+
+# Qt
+*.pro.user
+*.autosave
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+.qmake.stash
+
+# Build outputs
+build/
+dist/
+*.deb
+*.rpm
+*.AppImage
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Cache
+.cache/
+thumbs/
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
