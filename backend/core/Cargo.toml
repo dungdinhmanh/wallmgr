@@ -12,6 +12,7 @@ serde_json.workspace = true
 toml.workspace = true
 sqlx.workspace = true
 rusqlite.workspace = true
+tokio-rusqlite.workspace = true
 anyhow.workspace = true
 thiserror.workspace = true
 uuid.workspace = true

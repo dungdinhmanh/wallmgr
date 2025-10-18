@@ -157,6 +157,7 @@ pub struct BooruImage {
     pub rating: Rating,
     pub score: Option<i32>,
     pub author: Option<String>,
+    pub is_nsfw: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

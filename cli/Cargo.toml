@@ -18,13 +18,16 @@ tracing-subscriber.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 anyhow.workspace = true
-reqwest.workspace = true
 
 # CLI args
 clap.workspace = true
+colored.workspace = true
 
 # HTTP client for daemon communication
 reqwest = { workspace = true, features = ["json"] }
+
+# UUID parsing
+uuid.workspace = true
 
 # Human readable formatting
 human_bytes = "0.4"

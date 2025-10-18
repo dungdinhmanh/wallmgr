@@ -1,13 +1,6 @@
-# Rust
+# Rust build artifacts
 /target/
-**/target/
 Cargo.lock
-
-# Build artifacts
-*.o
-*.so
-*.a
-test_connector
 
 # IDE
 .vscode/
@@ -19,6 +12,10 @@ test_connector
 # OS
 .DS_Store
 Thumbs.db
+
+# User config
+*.local.json
+settings.json
 
 # Logs
 *.log

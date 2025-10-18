@@ -84,6 +84,7 @@ impl BooruConnector for GelbooruConnector {
             .into_iter()
             .filter_map(|post| {
                 let file_url = post.file_url?;
+                let is_nsfw = post.rating != "general" && post.rating != "safe";
 
                 Some(BooruImage {
                     id: post.id.to_string(),
@@ -97,6 +98,7 @@ impl BooruConnector for GelbooruConnector {
                     rating: parse_rating(&post.rating),
                     score: post.score,
                     author: post.owner,
+                    is_nsfw,
                 })
             })
             .collect();
@@ -166,6 +168,8 @@ impl BooruConnector for GelbooruConnector {
 
         let file_url = post.file_url
             .ok_or_else(|| Error::NotFound("No file URL found".to_string()))?;
+        
+        let is_nsfw = post.rating != "general" && post.rating != "safe";
 
         Ok(BooruImage {
             id: post.id.to_string(),
@@ -179,6 +183,7 @@ impl BooruConnector for GelbooruConnector {
             rating: parse_rating(&post.rating),
             score: post.score,
             author: post.owner,
+            is_nsfw,
         })
     }
 }

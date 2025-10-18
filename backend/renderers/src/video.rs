@@ -18,7 +18,8 @@ impl VideoRenderer {
         }
     }
 
-    fn get_window_id(monitor: Option<&str>) -> Result<Option<String>> {
+    #[allow(dead_code)]
+    fn get_window_id(_monitor: Option<&str>) -> Result<Option<String>> {
         // For X11, we need to get or create a window ID
         // This is a simplified version - in practice you'd want to:
         // 1. Check if running on X11 or Wayland
@@ -120,7 +121,7 @@ impl RendererTrait for VideoRenderer {
     }
 
     fn is_running(&self) -> bool {
-        if let Some(child) = &self.process {
+        if let Some(_child) = &self.process {
             // Check if process is still alive
             // This is a simplified check
             true

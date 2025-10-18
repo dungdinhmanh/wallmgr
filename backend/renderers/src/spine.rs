@@ -109,10 +109,20 @@ impl RendererTrait for SpineRenderer {
     }
 
     fn is_available(&self) -> bool {
-        self.renderer_path.is_some()
+        // TODO: Spine renderer is coming soon - temporarily disabled
+        // self.renderer_path.is_some()
+        false
     }
 
+    #[allow(unused_variables)]
     fn start(&mut self, path: &Path, monitor: Option<&str>) -> Result<()> {
+        // Spine renderer is coming soon - currently disabled
+        return Err(Error::Renderer(
+            "Spine animation support is coming soon! Currently under development.".to_string()
+        ));
+
+        #[allow(unreachable_code)]
+        {
         let renderer = self
             .renderer_path
             .as_ref()
@@ -169,6 +179,7 @@ impl RendererTrait for SpineRenderer {
         self.current_path = Some(project_dir.to_string_lossy().to_string());
 
         Ok(())
+        } // End of unreachable_code block
     }
 
     fn stop(&mut self) -> Result<()> {

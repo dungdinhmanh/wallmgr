@@ -1,4 +1,4 @@
-use crate::booru::{BooruClient, BooruConnector, parse_rating};
+use crate::booru::{BooruClient, BooruConnector};
 use async_trait::async_trait;
 use serde::Deserialize;
 use wallmgr_core::error::{Error, Result};
@@ -78,6 +78,7 @@ impl BooruConnector for SafebooruConnector {
             .filter_map(|post| {
                 let image = post.image?;
                 let file_url = format!("https://safebooru.org/images/{}", image);
+                let is_nsfw = false; // Safebooru is always SFW
 
                 Some(BooruImage {
                     id: post.id.to_string(),
@@ -91,6 +92,7 @@ impl BooruConnector for SafebooruConnector {
                     rating: Rating::Safe, // Safebooru only has safe content
                     score: post.score,
                     author: post.owner,
+                    is_nsfw,
                 })
             })
             .collect();
@@ -157,6 +159,7 @@ impl BooruConnector for SafebooruConnector {
             .ok_or_else(|| Error::NotFound("No image found".to_string()))?;
 
         let file_url = format!("https://safebooru.org/images/{}", image);
+        let is_nsfw = false; // Safebooru is always SFW
 
         Ok(BooruImage {
             id: post.id.to_string(),
@@ -170,6 +173,7 @@ impl BooruConnector for SafebooruConnector {
             rating: Rating::Safe,
             score: post.score,
             author: post.owner,
+            is_nsfw,
         })
     }
 }

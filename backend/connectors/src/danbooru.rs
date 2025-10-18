@@ -1,6 +1,6 @@
 use crate::booru::{BooruClient, BooruConnector, parse_rating};
 use async_trait::async_trait;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use wallmgr_core::error::{Error, Result};
 use wallmgr_core::types::BooruImage;
 
@@ -27,6 +27,7 @@ struct DanbooruPost {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct DanbooruTag {
     name: String,
     post_count: i64,
@@ -87,14 +88,16 @@ impl BooruConnector for DanbooruConnector {
         let images = posts
             .into_iter()
             .filter_map(|post| {
-                let file_url = post.file_url.or(post.large_file_url)?;
+                let file_url = post.file_url.clone().or_else(|| post.large_file_url.clone())?;
+                let sample_url = post.large_file_url.clone();
+                let is_nsfw = post.rating != "s";
 
                 Some(BooruImage {
                     id: post.id.to_string(),
                     source: "danbooru".to_string(),
                     file_url,
                     preview_url: post.preview_file_url.clone(),
-                    sample_url: post.large_file_url,
+                    sample_url,
                     width: post.image_width,
                     height: post.image_height,
                     tags: post.tag_string.split_whitespace().map(|s| s.to_string()).collect(),
@@ -105,6 +108,7 @@ impl BooruConnector for DanbooruConnector {
                     } else {
                         None
                     },
+                    is_nsfw,
                 })
             })
             .collect();
@@ -161,16 +165,19 @@ impl BooruConnector for DanbooruConnector {
             .await
             .map_err(|e| Error::Renderer(format!("Failed to parse Danbooru response: {}", e)))?;
 
-        let file_url = post.file_url
-            .or(post.large_file_url)
+        let file_url = post.file_url.clone()
+            .or_else(|| post.large_file_url.clone())
             .ok_or_else(|| Error::NotFound("No file URL found".to_string()))?;
+        
+        let sample_url = post.large_file_url.clone();
+        let is_nsfw = post.rating != "s";
 
         Ok(BooruImage {
             id: post.id.to_string(),
             source: "danbooru".to_string(),
             file_url,
             preview_url: post.preview_file_url,
-            sample_url: post.large_file_url,
+            sample_url,
             width: post.image_width,
             height: post.image_height,
             tags: post.tag_string.split_whitespace().map(|s| s.to_string()).collect(),
@@ -181,6 +188,7 @@ impl BooruConnector for DanbooruConnector {
             } else {
                 None
             },
+            is_nsfw,
         })
     }
 }

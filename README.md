@@ -10,10 +10,10 @@
 Wallmgr is the **only Linux wallpaper manager** with:
 
 ### 🎨 4 Wallpaper Types
-- **Static Images**: PNG, JPG, WebP, BMP
-- **Video Wallpapers**: MP4, WebM, MKV, **GIF** (via mpv)
-- **Spine Animations**: Skeletal 2D animations (.skel + .atlas + .png)
-- **Wallpaper Engine**: Full Steam Workshop projects (via linux-wallpaperengine)
+- **Static Images**: PNG, JPG, WebP, BMP ✅
+- **Video Wallpapers**: MP4, WebM, MKV, **GIF** (via mpv) ✅
+- **Spine Animations**: Skeletal 2D animations (.skel + .atlas + .png) 🚧 **Coming Soon**
+- **Wallpaper Engine**: Full Steam Workshop projects (via linux-wallpaperengine) ✅
 
 ### 🖥️ Universal Compatibility
 - **X11**: Feh, Nitrogen, XWallpaper
@@ -138,7 +138,7 @@ fn detect_type(path: &Path) -> WallpaperType {
 | Feature | Wallmgr | Variety | Komorebi | Other Managers |
 |---------|---------|---------|----------|----------------|
 | **Video Support** | ✅ | ✅ | ⚠️ | ⚠️ |
-| **Spine Animations** | ✅ **Unique** | ❌ | ❌ | ❌ |
+| **Spine Animations** | 🚧 **Coming Soon** | ❌ | ❌ | ❌ |
 | **Wallpaper Engine** | ✅ **Unique** | ❌ | 🟡 | ❌ |
 | **Booru Search** | ✅ | ❌ | ❌ | ❌ |
 | **Multi-DE Support** | ✅ | ⚠️ | ⚠️ | ⚠️ |
@@ -163,15 +163,18 @@ wallmgr add ~/Videos/ocean.mp4
 wallmgr add ~/Pictures/anime.gif
 ```
 
-### Spine Renderer (spine-runtime)
-**Best for:**
+### Spine Renderer (spine-runtime) 🚧 Coming Soon
+**Status:** Currently under development - not yet available
+
+**Planned features:**
 - 2D character animations
 - Skeletal rigging
 - Smooth bone-based movement
 - **Anime-style characters**
 
 ```bash
-wallmgr add ~/Spine/character-directory/
+# Will be available in future release
+# wallmgr add ~/Spine/character-directory/
 ```
 
 ### Wallpaper Engine Renderer (linux-wallpaperengine)
@@ -329,7 +332,8 @@ cargo run --bin wallmgr -- list
 
 ### v1.0.0 (2025-01-07)
 - ✅ Complete backend implementation
-- ✅ 3 dynamic wallpaper renderers
+- ✅ 2 dynamic wallpaper renderers (Video/GIF + Wallpaper Engine)
+- 🚧 Spine renderer (coming soon)
 - ✅ REST API + WebSocket support
 - ✅ CLI and daemon binaries
 - ✅ Multi-platform display support
@@ -341,7 +345,7 @@ cargo run --bin wallmgr -- list
 ## 📝 Known Limitations
 
 - **Qt6 Frontend**: Optional, CLI/API provides full functionality
-- **Spine Runtime**: Requires custom spine-runtime implementation
+- **Spine Animations**: 🚧 Coming soon - currently under development
 - **WallpaperEngine**: Requires linux-wallpaperengine installation
 - **GPU Drivers**: Some renderers require proper OpenGL drivers
 

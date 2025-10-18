@@ -34,6 +34,15 @@ pub enum Error {
 
     #[error("Invalid input: {0}")]
     InvalidInput(String),
+
+    #[error("Network error: {0}")]
+    Network(String),
+
+    #[error("API error: {0}")]
+    Api(String),
+
+    #[error("Parse error: {0}")]
+    Parse(String),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

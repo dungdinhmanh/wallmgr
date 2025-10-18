@@ -4,8 +4,8 @@ members = [
     "backend/adapters",
     "backend/renderers",
     "backend/connectors",
-    "backend/api",
-    "backend/daemon",
+    # "backend/api",      # Temporarily disabled - needs async DB refactor
+    # "backend/daemon",   # Temporarily disabled - depends on API
     "cli",
 ]
 resolver = "2"
@@ -35,6 +35,7 @@ toml = "0.8"
 # Database
 sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "sqlite"] }
 rusqlite = { version = "0.32", features = ["bundled"] }
+tokio-rusqlite = "0.6"
 
 # HTTP client
 reqwest = { version = "0.12", features = ["json", "stream"] }

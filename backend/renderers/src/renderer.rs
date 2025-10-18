@@ -1,6 +1,5 @@
 use wallmgr_core::error::Result;
 use std::path::Path;
-use std::process::Child;
 
 pub trait RendererTrait: Send + Sync {
     /// Get renderer name

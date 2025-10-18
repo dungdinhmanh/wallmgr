@@ -92,15 +92,16 @@ impl RendererTrait for WallpaperEngineRenderer {
     }
 
     fn start(&mut self, path: &Path, monitor: Option<&str>) -> Result<()> {
-        let linux_we = self
+        let linux_we_path = self
             .linux_we_path
             .as_ref()
-            .ok_or_else(|| Error::Renderer("linux-wallpaperengine not found".to_string()))?;
+            .ok_or_else(|| Error::Renderer("linux-wallpaperengine not found".to_string()))?
+            .clone();
 
         // Stop any existing process
         self.stop()?;
 
-        let mut cmd = Command::new(linux_we);
+        let mut cmd = Command::new(&linux_we_path);
 
         // Determine the project directory
         let project_dir = if path.is_dir() {

@@ -27,6 +27,7 @@ struct YanderePost {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct YandereTag {
     name: String,
     count: i64,
@@ -88,6 +89,7 @@ impl BooruConnector for YandereConnector {
             .into_iter()
             .filter_map(|post| {
                 let file_url = post.file_url?;
+                let is_nsfw = post.rating != "s";
 
                 Some(BooruImage {
                     id: post.id.to_string(),
@@ -101,6 +103,7 @@ impl BooruConnector for YandereConnector {
                     rating: parse_rating(&post.rating),
                     score: post.score,
                     author: post.author,
+                    is_nsfw,
                 })
             })
             .collect();
@@ -157,6 +160,8 @@ impl BooruConnector for YandereConnector {
 
         let file_url = post.file_url
             .ok_or_else(|| Error::NotFound("No file URL found".to_string()))?;
+        
+        let is_nsfw = post.rating != "s";
 
         Ok(BooruImage {
             id: post.id.to_string(),
@@ -170,6 +175,7 @@ impl BooruConnector for YandereConnector {
             rating: parse_rating(&post.rating),
             score: post.score,
             author: post.author,
+            is_nsfw,
         })
     }
 }

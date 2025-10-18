@@ -1,6 +1,6 @@
-use crate::error::{Error, Result};
+use crate::error::Result;
 use crate::types::{Tag, Wallpaper, WallpaperType};
-use chrono::{DateTime, Utc};
+use chrono::DateTime;
 use rusqlite::{params, Connection};
 use std::path::Path;
 use uuid::Uuid;
@@ -311,10 +311,11 @@ impl Database {
         );
 
         let mut stmt = self.conn.prepare(&query)?;
+        let tags_len = tags.len();
         let params_vec: Vec<&dyn rusqlite::ToSql> = tags
             .iter()
             .map(|t| t as &dyn rusqlite::ToSql)
-            .chain(std::iter::once(&tags.len() as &dyn rusqlite::ToSql))
+            .chain(std::iter::once(&tags_len as &dyn rusqlite::ToSql))
             .collect();
 
         let wallpapers = stmt
